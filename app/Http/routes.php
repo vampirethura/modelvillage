@@ -58,10 +58,16 @@ Route::resource('/crm/system_icon', 'SystemIconController');
 // Post Routes ------------------------------------------------------------------------------------->
 Route::resource('/crm/post', 'PostController');
 
+// Notification Routes ------------------------------------------------------------------------------------->
+Route::resource('/crm/notification', 'NotificationController');
+
 
 // API Routes Start ------------------------------------------------------------------------------------->
 Route::group(array('prefix' => '/api/v1'), function(){
+	Route::post('login', 'Api\v1\LoginApiController@login');
 	Route::post('get_posts', 'Api\v1\PostApiController@getPosts');
+	Route::post('like_post', 'Api\v1\PostApiController@likePost');
+	Route::post('unlike_post', 'Api\v1\PostApiController@unlikePost');
 });
 // API Routes End ------------------------------------------------------------------------------------->
 

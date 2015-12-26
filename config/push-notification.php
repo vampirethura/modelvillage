@@ -10,7 +10,7 @@ return array(
     ),
     'l5fAndroid' => array(
         'environment' =>'development',
-        'apiKey'      =>'AIzaSyC4Q2kvwVoS32TjPuQrzzNjhHD7rRZvFAI',
+        'apiKey'      =>'AIzaSyDBGyZQN5lLJVvuL2Vt9rRskNxlxZA_7CE',
         'service'     =>'gcm'
     )
 

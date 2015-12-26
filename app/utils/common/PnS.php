@@ -10,10 +10,10 @@ namespace Common;
      private static $pns_android_app_name;
      private static $pns_ios_app_name;
 
-     static function init(){
-        $pns_configs = array_slice(\Config::get('laravel-push-notification::config'), 2);
+     static function init(){       
+        $pns_configs = array_slice(config('push-notification'), 2);
         if (!$pns_configs) {
-            $pns_configs = \Config::get('laravel-push-notification::config');
+            $pns_configs = config('push-notification');
         }
         foreach ($pns_configs as $key => $pns_config) {
       		switch ($pns_config['service']) {
@@ -70,7 +70,7 @@ namespace Common;
                $a_devices_collection = \PushNotification::DeviceCollection($a_devices_collection);
                if ($data && is_array($data)) {
                    $message = \PushNotification::Message($message, $data);
-               }               
+               }
                \PushNotification::app(self::$pns_android_app_name)
                                ->to($a_devices_collection)
                                ->send($message);

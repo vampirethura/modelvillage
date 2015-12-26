@@ -71,9 +71,9 @@ class Handler extends ExceptionHandler
     protected function convertExceptionToResponse(Exception $e)
     {
         $debug = config('app.debug', false);
-        // if ($debug) {
-        //     return (new SymfonyDisplayer($debug))->createResponse($e);
-        // }
+        if ($debug) {
+            return (new SymfonyDisplayer($debug))->createResponse($e);
+        }
         return response()->view('errors.500', ['exception' => $e, 'debug' => $debug], 500);
     }
 }

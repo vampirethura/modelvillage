@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Post | Create
+    Notification | Create
 @stop
 
 @section('css')
@@ -19,14 +19,14 @@
     <ol class="breadcrumb">
       <li class="active"><a href="/crm/home"><i class="fa fa-home"></i> Home</a></li>
       @if($module != 'home')
-      <li><a href="/crm/{{$module}}">Posts</a></li>
-      <li class="active">Create Post</li>
+      <li><a href="/crm/{{$module}}">Notifications</a></li>
+      <li class="active">Create Notification</li>
       @endif
     </ol>
   </section>
   <section class="content">
     <div class="row">
-      {!! Form::open(['url'=>'/crm/' . $module, 'method'=>'POST', 'files' => true]) !!}
+      {!! Form::open(['url'=>'/crm/' . $module, 'method'=>'POST']) !!}
         <div class="col-lg-12 col-md-12 col-sm-12">
           <!-- Horizontal Form -->
             <div class="box box-success">
@@ -37,16 +37,15 @@
                 <div class="box-body">
                   <div class="form-horizontal">
                     <div class="form-group">
-                      <label for="photo" class="col-sm-2 control-label">Post Photo</label>
+                      <label for="subject" class="col-sm-2 control-label">Subject</label>
                       <div class="col-sm-10">
-                        <div style="height:0px;overflow:hidden;"><input type="file" id="photo" name="photo" class="image_input" accept="image/*" required/></div>
-                        <img class="img-editable img-responsive" src="/assets/images/generals/image_user_dp_default.png" alt="Post Photo">
+                        <input type="text" id="subject" class="form-control" placeholder="Subject" name="subject" required value="{{ old('subject') }}"/>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label for="description" class="col-sm-2 control-label">Post Description</label>
+                      <label for="body" class="col-sm-2 control-label">Body</label>
                       <div class="col-sm-10">
-                        <textarea id="description" class="form-control" placeholder="Post Description" name="description" required rows="10">{{ old('description') }}</textarea>
+                        <input type="text" id="body" class="form-control" placeholder="Body" name="body" required value="{{ old('body') }}"/>
                       </div>
                     </div>
                   </div>
@@ -54,7 +53,7 @@
                 <div class="box-footer">
                   <a href="/crm/{{$module}}" class="btn btn-warning">Cancel</a>
                   <a href="/crm/{{$module}}/create" class="btn btn-danger">Reset</a>
-                  <button type="submit" class="btn btn-info pull-right">Create</button>
+                  <button type="submit" class="btn btn-info pull-right">Send</button>
                 </div><!-- /.box-footer -->
 
             </div><!-- /.box -->

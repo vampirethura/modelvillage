@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Post | Index
+    Notification | Index
 @stop
 
 @section('css')
@@ -21,7 +21,7 @@
     <ol class="breadcrumb">
       <li class="active"><a href="/crm/home"><i class="fa fa-home"></i> Home</a></li>
       @if($module != 'home')
-      <li class="active">Posts</li>
+      <li class="active">Notifications</li>
       @endif
     </ol>
   </section>
@@ -36,27 +36,27 @@
         </div>
         <div class="box box-success">
           <div class="box-header with-border">
-            <h3 class="box-title">Table of Posts</h3>
+            <h3 class="box-title">Table of Notifications</h3>
           </div><!-- /.box-header -->
           <div class="box-body table-responsive">
             <table id="data-table" class="table table-bordered table-striped">
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Description</th>
-                  <th>Photo</th>
+                  <th>Subject</th>
+                  <th>Body</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                @foreach($posts as $post)
+                @foreach($notifications as $notification)
                    <tr>
-                       <td>{{$post->id}}</td>
-                       <td>{{$post->description}}</td>
-                       <td>{{$post->photo}}</td>
+                       <td>{{$notification->id}}</td>
+                       <td>{{$notification->subject}}</td>
+                       <td>{{$notification->body}}</td>
                        <td>
                            @if(isset(Session::get('permissions')[$module]))
-                               {{ Render::tableButtons(Session::get('permissions')[$module], $actions['table'] ,array("[UID]" => $post->id) ) }}
+                               {{ Render::tableButtons(Session::get('permissions')[$module], $actions['table'] ,array("[UID]" => $notification->id) ) }}
                            @endif
                        </td>
                    </tr>
