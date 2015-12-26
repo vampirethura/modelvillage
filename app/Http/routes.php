@@ -59,6 +59,13 @@ Route::resource('/crm/system_icon', 'SystemIconController');
 Route::resource('/crm/post', 'PostController');
 
 
+// API Routes Start ------------------------------------------------------------------------------------->
+Route::group(array('prefix' => '/api/v1'), function(){
+	Route::post('get_posts', 'Api\v1\PostApiController@getPosts');
+});
+// API Routes End ------------------------------------------------------------------------------------->
+
+
 
 
 /*Start Test Routes*/
