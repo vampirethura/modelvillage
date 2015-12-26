@@ -55,9 +55,9 @@ return [
         'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
-            'database'  => env('DB_DATABASE', 'l5f_db'),
-            'username'  => env('DB_USERNAME', 'root'),
-            'password'  => env('DB_PASSWORD', 'ortoasdfgu645u3i'),
+            'database'  => env('DB_DATABASE', 'u181043782_mvldb'),
+            'username'  => env('DB_USERNAME', 'u181043782_vamp'),
+            'password'  => env('DB_PASSWORD', 'EnsYf73P2T'),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
