@@ -68,6 +68,7 @@ Route::group(array('prefix' => '/api/v1'), function(){
 	Route::post('get_posts', 'Api\v1\PostApiController@getPosts');
 	Route::post('like_post', 'Api\v1\PostApiController@likePost');
 	Route::post('unlike_post', 'Api\v1\PostApiController@unlikePost');
+	Route::post('get_notifications', 'Api\v1\NotificationApiController@getNotifications');
 });
 // API Routes End ------------------------------------------------------------------------------------->
 

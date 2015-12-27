@@ -28,11 +28,10 @@ class PostApiController extends Controller
         $index = $request->get('index', 1);
   			$limit = 5;
   			$offset = $index - 1;
-  			$posts = Post::whereNull('deleted_at')
-          							 ->take($limit)
-          							 ->offset($offset * $limit)
-          							 ->orderBy('created_at', 'DESC')
-          							 ->get();
+  			$posts = Post::take($limit)
+      							 ->offset($offset * $limit)
+      							 ->orderBy('created_at', 'DESC')
+      							 ->get();
         $data = [];
         $customer = SessionUtil::getCustomer($session_token);
         foreach ($posts as $post) {
@@ -48,6 +47,7 @@ class PostApiController extends Controller
             'is_liked' => $is_liked
           ];
         }
+        // sleep(2000);
   			return Response::json(['status' => 1, 'message' => 'Success', 'data' => $data]);
       } catch (Exception $e) {
         return Response::json(['status' => 0, 'message' => $e->getMessage()]);
