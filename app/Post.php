@@ -22,4 +22,11 @@ class Post extends Model
   public function comments(){
     return $this->hasMany('App\Comment', 'post_id', 'id');
   }
+
+  # Relationship -------------------------------------------------------------------------------------------------->
+  # ---------------
+  # One-to-One # hasOne(Model, foreign_key, local_key) # belongsTo(Model, local_key, parent_key)
+  public function customer(){
+    return $this->belongsTo('App\Customer', 'customer_id', 'id');
+  }
 }

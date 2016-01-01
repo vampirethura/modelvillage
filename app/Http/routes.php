@@ -67,6 +67,7 @@ Route::group(array('prefix' => '/api/v1'), function(){
 	Route::post('login', 'Api\v1\LoginApiController@login');
 	Route::post('get_posts', 'Api\v1\PostApiController@getPosts');
 	Route::post('get_post', 'Api\v1\PostApiController@getPost');
+	Route::post('new_post', 'Api\v1\PostApiController@newPost');
 	Route::post('like_post', 'Api\v1\PostApiController@likePost');
 	Route::post('unlike_post', 'Api\v1\PostApiController@unlikePost');
 	Route::post('get_notifications', 'Api\v1\NotificationApiController@getNotifications');

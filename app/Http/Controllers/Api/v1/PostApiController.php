@@ -11,6 +11,7 @@ use App\Post;
 use \Response;
 use \DB;
 use Common\SessionUtil;
+use Common\FileUpload;
 use \Exception;
 
 class PostApiController extends Controller
@@ -45,7 +46,8 @@ class PostApiController extends Controller
             'photo' => $post->photo,
             'like_count' => $post->likes->count(),
             'is_liked' => $is_liked,
-            'comment_count' => $post->comments->count()
+            'comment_count' => $post->comments->count(),
+            'customer_name' => $post->customer->display_name
           ];
         }
         // sleep(2000);
@@ -75,7 +77,8 @@ class PostApiController extends Controller
           'photo' => $post->photo,
           'like_count' => $post->likes->count(),
           'is_liked' => $is_liked,
-          'comment_count' => $post->comments->count()
+          'comment_count' => $post->comments->count(),
+          'customer_name' => $post->customer->display_name
         ];
         // sleep(5);
   			return Response::json(['status' => 1, 'message' => 'Success', 'data' => $data]);
@@ -113,6 +116,28 @@ class PostApiController extends Controller
       $post = Post::find($post_id);
       $post->likes()->detach($customer);
       return Response::json(['status' => 1, 'message' => 'Unliked']);
+    } catch (Exception $e) {
+      return Response::json(['status' => 0, 'message' => $e->getMessage()]);
+    }
+
+  }
+
+  public function newPost(Request $request){
+    try {
+      $session_token = $request->get('session_token');
+      $customer = SessionUtil::getCustomer($session_token);
+      $description = $request->get('description');
+      $photo = $request->file('photo');
+      $inputs = [];
+      if ($photo) {
+          //Upload Image
+          $uploaded_path = FileUpload::upload($photo);
+          $inputs['photo'] = $uploaded_path;
+      }
+      $inputs['description'] = $description;
+      $inputs['customer_id'] = $customer->id;
+      Post::create($inputs);
+      return Response::json(['status' => 1, 'message' => 'Success']);
     } catch (Exception $e) {
       return Response::json(['status' => 0, 'message' => $e->getMessage()]);
     }
