@@ -44,10 +44,40 @@ class PostApiController extends Controller
             'description' => $post->description,
             'photo' => $post->photo,
             'like_count' => $post->likes->count(),
-            'is_liked' => $is_liked
+            'is_liked' => $is_liked,
+            'comment_count' => $post->comments->count()
           ];
         }
         // sleep(2000);
+  			return Response::json(['status' => 1, 'message' => 'Success', 'data' => $data]);
+      } catch (Exception $e) {
+        return Response::json(['status' => 0, 'message' => $e->getMessage()]);
+      }
+
+  }
+
+  public function getPost(Request $request)
+  {
+      try {
+        $session_token = $request->get('session_token');
+        $post_id = $request->get('post_id');
+
+  			$post = Post::find($post_id);
+        $data = [];
+        $customer = SessionUtil::getCustomer($session_token);
+        $is_liked = DB::table('post_likes')
+                      ->where('customer_id', $customer->id)
+                      ->where('post_id', $post->id)
+                      ->exists();
+        $data = [
+          'id' => $post->id,
+          'description' => $post->description,
+          'photo' => $post->photo,
+          'like_count' => $post->likes->count(),
+          'is_liked' => $is_liked,
+          'comment_count' => $post->comments->count()
+        ];
+        // sleep(5);
   			return Response::json(['status' => 1, 'message' => 'Success', 'data' => $data]);
       } catch (Exception $e) {
         return Response::json(['status' => 0, 'message' => $e->getMessage()]);

@@ -66,9 +66,12 @@ Route::resource('/crm/notification', 'NotificationController');
 Route::group(array('prefix' => '/api/v1'), function(){
 	Route::post('login', 'Api\v1\LoginApiController@login');
 	Route::post('get_posts', 'Api\v1\PostApiController@getPosts');
+	Route::post('get_post', 'Api\v1\PostApiController@getPost');
 	Route::post('like_post', 'Api\v1\PostApiController@likePost');
 	Route::post('unlike_post', 'Api\v1\PostApiController@unlikePost');
 	Route::post('get_notifications', 'Api\v1\NotificationApiController@getNotifications');
+	Route::post('post_comment', 'Api\v1\CommentApiController@postComment');
+	Route::post('get_comments', 'Api\v1\CommentApiController@getComments');
 });
 // API Routes End ------------------------------------------------------------------------------------->
 

@@ -26,7 +26,7 @@ class NotificationApiController extends Controller
       try {
         $session_token = $request->get('session_token');
         $index = $request->get('index', 1);
-        $limit = 5;
+        $limit = 10;
         $offset = $index - 1;
         $notifications = Notification::take($limit)
                       							 ->offset($offset * $limit)
