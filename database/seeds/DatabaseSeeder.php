@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
     		$this->call(CountryTableSeeder::class);
     		$this->call(SettingTableSeeder::class);
     		$this->call(LanguageTableSeeder::class);
+    		$this->call(CustomerTableSeeder::class);
 
         Model::reguard();
         $this->command->info('All tables has been seeded!');

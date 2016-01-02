@@ -14,7 +14,7 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('customer_id')->default(0);
+            $table->integer('customer_id')->default(1);
             $table->mediumText('description');
             $table->string('photo');
 
