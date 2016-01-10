@@ -12,6 +12,7 @@ use \Response;
 use \DB;
 use Common\SessionUtil;
 use Common\FileUpload;
+use Common\TimeAgo;
 use \Exception;
 
 class PostApiController extends Controller
@@ -35,19 +36,23 @@ class PostApiController extends Controller
       							 ->get();
         $data = [];
         $customer = SessionUtil::getCustomer($session_token);
+        $timeAgo = new TimeAgo();
         foreach ($posts as $post) {
           $is_liked = DB::table('post_likes')
                         ->where('customer_id', $customer->id)
                         ->where('post_id', $post->id)
                         ->exists();
+          $is_photo_post = $post->photo != null && $post->photo != "";
           $data[] = [
             'id' => $post->id,
             'description' => $post->description,
             'photo' => $post->photo,
             'like_count' => $post->likes->count(),
             'is_liked' => $is_liked,
+            'is_photo_post' => $is_photo_post,
             'comment_count' => $post->comments->count(),
-            'customer_name' => $post->customer->display_name
+            'customer_name' => $post->customer->display_name,
+            'ago' => $timeAgo->inWords($post->created_at)
           ];
         }
         // sleep(2000);
@@ -71,14 +76,18 @@ class PostApiController extends Controller
                       ->where('customer_id', $customer->id)
                       ->where('post_id', $post->id)
                       ->exists();
+        $is_photo_post = $post->photo != null && $post->photo != "";
+        $timeAgo = new TimeAgo();
         $data = [
           'id' => $post->id,
           'description' => $post->description,
           'photo' => $post->photo,
           'like_count' => $post->likes->count(),
           'is_liked' => $is_liked,
+          'is_photo_post' => $is_photo_post,
           'comment_count' => $post->comments->count(),
-          'customer_name' => $post->customer->display_name
+          'customer_name' => $post->customer->display_name,
+          'ago' => $timeAgo->inWords($post->created_at)
         ];
         // sleep(5);
   			return Response::json(['status' => 1, 'message' => 'Success', 'data' => $data]);
